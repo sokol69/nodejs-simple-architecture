@@ -1,0 +1,24 @@
+{
+  "name": "nodejs-simple-architecture",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sokol69/nodejs-simple-architecture.git"
+  },
+  "author": "Dmitry Sokolov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sokol69/nodejs-simple-architecture/issues"
+  },
+  "homepage": "https://github.com/sokol69/nodejs-simple-architecture#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
