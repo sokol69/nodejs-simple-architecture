@@ -1,12 +1,12 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response } from "express";
 
 import { BaseController } from "../common/base.controller.js";
 import { IControllerRoute } from "../common/route.interface";
 import { HTTPError } from "../errors/http-error.class.js";
-import { LoggerService } from '../logger/logger.service.js'
+import { ILogger } from '../logger/logger.interface';
 
 export class UsersController extends BaseController {
-  constructor(logger: LoggerService) {
+  constructor(logger: ILogger) {
     super(logger);
     const routes: IControllerRoute[] = [
       {

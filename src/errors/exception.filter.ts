@@ -1,13 +1,13 @@
 import { NextFunction, Request, Response } from "express";
 
-import { LoggerService } from '../logger/logger.service.js'
+import { ILogger } from '../logger/logger.interface';
 import { IExceptionFilter } from './exception.filter.interface';
 import { HTTPError } from './http-error.class.js';
 
 export class ExceptionFilter implements IExceptionFilter {
-  logger: LoggerService;
+  logger: ILogger;
 
-  constructor(logger: LoggerService) {
+  constructor(logger: ILogger) {
     this.logger = logger;
   }
 
