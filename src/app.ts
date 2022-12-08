@@ -1,4 +1,4 @@
-import express, { Express } from "express";
+import express, { Express } from 'express';
 import { Server } from 'http';
 import { injectable, inject } from 'inversify';
 
@@ -10,31 +10,31 @@ import 'reflect-metadata';
 
 @injectable()
 export class App {
-  app: Express;
-  server: Server;
-  port: number;
+	app: Express;
+	server: Server;
+	port: number;
 
-  constructor(
-    @inject(TYPES.ILogger) private logger: ILogger,
-    @inject(TYPES.IExceptionFilter) private exceptionFilter: IExceptionFilter,
-    @inject(TYPES.UsersController) private userController: UsersController,
-    ) {
-    this.app = express();
-    this.port = 8000;
-  }
+	constructor(
+		@inject(TYPES.ILogger) private logger: ILogger,
+		@inject(TYPES.IExceptionFilter) private exceptionFilter: IExceptionFilter,
+		@inject(TYPES.UsersController) private userController: UsersController,
+	) {
+		this.app = express();
+		this.port = 8000;
+	}
 
-  useRoutes() {
-    this.app.use('/users', this.userController.router);
-  }
+	useRoutes() {
+		this.app.use('/users', this.userController.router);
+	}
 
-  useExceptionFilter() {
-    this.app.use(this.exceptionFilter.catch.bind(this.exceptionFilter));
-  }
+	useExceptionFilter() {
+		this.app.use(this.exceptionFilter.catch.bind(this.exceptionFilter));
+	}
 
-  public async init() {
-    this.useRoutes();
-    this.useExceptionFilter();
-    this.server = this.app.listen(this.port);
-    this.logger.log(`Server started on http://localhost:${this.port}`)
-  }
+	public async init() {
+		this.useRoutes();
+		this.useExceptionFilter();
+		this.server = this.app.listen(this.port);
+		this.logger.log(`Server started on http://localhost:${this.port}`);
+	}
 }
