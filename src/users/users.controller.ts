@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 import { injectable, inject } from 'inversify';
 
 import { BaseController } from "../common/base.controller.js";
@@ -6,10 +6,11 @@ import { IControllerRoute } from "../common/route.interface";
 import { HTTPError } from "../errors/http-error.class.js";
 import { ILogger } from '../logger/logger.interface';
 import { TYPES } from '../types.js';
+import { IUsersController } from './users.controller.interface';
 import 'reflect-metadata';
 
 @injectable()
-export class UsersController extends BaseController {
+export class UsersController extends BaseController implements IUsersController {
   constructor(@inject(TYPES.ILogger) private loggerService: ILogger) {
     super(loggerService);
     const routes: IControllerRoute[] = [
@@ -28,11 +29,11 @@ export class UsersController extends BaseController {
     this.bindRoutes(routes);
   }
 
-  login(req: Request, res: Response) {
+  login(req: Request, res: Response, next: NextFunction) {
     throw new HTTPError(401, 'Unauthorized');
   }
 
-  register(req: Request, res: Response) {
+  register(req: Request, res: Response, next: NextFunction) {
     this.ok(res, 'register');
   }
 }
