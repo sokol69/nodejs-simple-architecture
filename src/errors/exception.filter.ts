@@ -3,8 +3,8 @@ import { injectable, inject } from 'inversify';
 
 import { ILogger } from '../logger/logger.interface';
 import { IExceptionFilter } from './exception.filter.interface';
-import { HTTPError } from './http-error.class.js';
-import { TYPES } from '../types.js';
+import { HTTPError } from './http-error.class';
+import { TYPES } from '../types';
 import 'reflect-metadata';
 
 @injectable()

@@ -1,11 +1,11 @@
 import { Request, Response, NextFunction } from 'express';
 import { injectable, inject } from 'inversify';
 
-import { BaseController } from '../common/base.controller.js';
+import { BaseController } from '../common/base.controller';
 import { IControllerRoute } from '../common/route.interface';
-import { HTTPError } from '../errors/http-error.class.js';
+import { HTTPError } from '../errors/http-error.class';
 import { ILogger } from '../logger/logger.interface';
-import { TYPES } from '../types.js';
+import { TYPES } from '../types';
 import { IUsersController } from './users.controller.interface';
 import 'reflect-metadata';
 

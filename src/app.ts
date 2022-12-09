@@ -3,9 +3,9 @@ import { Server } from 'http';
 import { injectable, inject } from 'inversify';
 
 import { ILogger } from './logger/logger.interface';
-import { UsersController } from './users/users.controller.js';
+import { UsersController } from './users/users.controller';
 import { IExceptionFilter } from './errors/exception.filter.interface';
-import { TYPES } from './types.js';
+import { TYPES } from './types';
 import 'reflect-metadata';
 
 @injectable()
