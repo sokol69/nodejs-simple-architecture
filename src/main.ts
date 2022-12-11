@@ -7,11 +7,15 @@ import { ExceptionFilter } from './errors/exception.filter';
 import { IExceptionFilter } from './errors/exception.filter.interface';
 import { ILogger } from './logger/logger.interface';
 import { TYPES } from './types';
+import { IUsersController } from './users/users.controller.interface';
+import { IUserService } from './users/users.service.interface';
+import { UsersService } from './users/users.service';
 
 export const appBindings = new ContainerModule((bind: interfaces.Bind) => {
 	bind<ILogger>(TYPES.ILogger).to(LoggerService);
 	bind<IExceptionFilter>(TYPES.IExceptionFilter).to(ExceptionFilter);
-	bind<UsersController>(TYPES.UsersController).to(UsersController);
+	bind<IUsersController>(TYPES.UsersController).to(UsersController);
+	bind<IUserService>(TYPES.UsersService).to(UsersService);
 	bind<App>(TYPES.Application).to(App);
 });
 

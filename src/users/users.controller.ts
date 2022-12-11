@@ -10,10 +10,14 @@ import { IUsersController } from './users.controller.interface';
 import { UsersRegisterDto } from './dto/users.register.dto';
 import { UsersLoginDto } from './dto/users.login.dto';
 import 'reflect-metadata';
+import { IUserService } from './users.service.interface';
 
 @injectable()
 export class UsersController extends BaseController implements IUsersController {
-	constructor(@inject(TYPES.ILogger) private loggerService: ILogger) {
+	constructor(
+		@inject(TYPES.ILogger) private loggerService: ILogger,
+		@inject(TYPES.UsersService) private usersService: IUserService,
+	) {
 		super(loggerService);
 		const routes: IControllerRoute[] = [
 			{
@@ -36,8 +40,17 @@ export class UsersController extends BaseController implements IUsersController 
 		next(new HTTPError(401, 'Unauthorized'));
 	}
 
-	register(req: Request<{}, {}, UsersRegisterDto>, res: Response, next: NextFunction) {
-		console.log(req.body);
-		this.ok(res, 'register');
+	async register(
+		{ body }: Request<{}, {}, UsersRegisterDto>,
+		res: Response,
+		next: NextFunction,
+	): Promise<void> {
+		const result = await this.usersService.createUser(body);
+
+		if (!result) {
+			return next(new HTTPError(422, 'Such user is already exist'));
+		}
+
+		this.ok(res, { email: result.email });
 	}
 }
