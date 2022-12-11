@@ -7,6 +7,8 @@ import { HTTPError } from '../errors/http-error.class';
 import { ILogger } from '../logger/logger.interface';
 import { TYPES } from '../types';
 import { IUsersController } from './users.controller.interface';
+import { UsersRegisterDto } from './dto/users.register.dto';
+import { UsersLoginDto } from './dto/users.login.dto';
 import 'reflect-metadata';
 
 @injectable()
@@ -29,11 +31,13 @@ export class UsersController extends BaseController implements IUsersController 
 		this.bindRoutes(routes);
 	}
 
-	login(req: Request, res: Response, next: NextFunction) {
-		throw new HTTPError(401, 'Unauthorized');
+	login(req: Request<{}, {}, UsersLoginDto>, res: Response, next: NextFunction) {
+		console.log(req.body);
+		next(new HTTPError(401, 'Unauthorized'));
 	}
 
-	register(req: Request, res: Response, next: NextFunction) {
+	register(req: Request<{}, {}, UsersRegisterDto>, res: Response, next: NextFunction) {
+		console.log(req.body);
 		this.ok(res, 'register');
 	}
 }
